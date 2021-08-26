@@ -9,7 +9,7 @@ class Statistics extends StatefulWidget {
 }
 
 class _StatisticsState extends State<Statistics> {
-  int selectedRadio = 0;
+  int selectedRadio = 1;
 
   void setSelected(int? value) {
     setState(() {
@@ -34,10 +34,10 @@ class _StatisticsState extends State<Statistics> {
     }
   }
 
+  bool isSelected = false;
+
   @override
   Widget build(BuildContext context) {
-    // DateTime date = DateTime.now();
-
     return Container(
       child: Column(
         children: [
@@ -76,7 +76,7 @@ class _StatisticsState extends State<Statistics> {
                     ),
                     trailing: Radio(
                       value: 1,
-                      groupValue: 1,
+                      groupValue: selectedRadio,
                       onChanged: setSelected,
                     )),
               ),
@@ -119,60 +119,63 @@ class _StatisticsState extends State<Statistics> {
                       TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                onTap: () {
-                  _openDatePicker(context);
-                },
-                child: Container(
-                  height: 50.0,
-                  width: 180.0,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20.0),
+          isSelected
+              ? Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          _openDatePicker(context);
+                        },
+                        child: Container(
+                          height: 50.0,
+                          width: 180.0,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.calendar_today,
+                              color: Colors.white,
+                            ),
+                            title: Text(
+                              _selectDate,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _openDatePicker(context);
+                        },
+                        child: Container(
+                          height: 50.0,
+                          width: 180.0,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.calendar_today,
+                              color: Colors.white,
+                            ),
+                            title: Text(
+                              _selectDate,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.calendar_today,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      _selectDate,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                )
+              : SizedBox(
+                  height: 20.0,
                 ),
-              ),
-              InkWell(
-                onTap: () {
-                  _openDatePicker(context);
-                },
-                child: Container(
-                  height: 50.0,
-                  width: 180.0,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.calendar_today,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      _selectDate,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
