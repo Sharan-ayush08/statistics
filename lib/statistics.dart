@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:statistics/screens/date_show.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key? key}) : super(key: key);
@@ -17,24 +18,7 @@ class _StatisticsState extends State<Statistics> {
     });
   }
 
-  String _selectDate = DateTime.now().toString();
-  _openDatePicker(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1940),
-      lastDate: DateTime(2030),
-    );
-    if (picked != null) {
-      setState(() {
-        _selectDate = new DateFormat.yMEd("en_US").format(picked).toString();
-        // print(date.toString());
-        print(_selectDate);
-      });
-    }
-  }
-
-  bool isSelected = false;
+  bool selectDuty = false;
 
   @override
   Widget build(BuildContext context) {
@@ -107,75 +91,10 @@ class _StatisticsState extends State<Statistics> {
             ],
           ),
           SizedBox(height: 14),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                "From",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              Text("To",
-                  style:
-                      TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-            ],
+          selectedRadio == 1 ? Container() : Date(),
+          SizedBox(
+            height: 20.0,
           ),
-          isSelected
-              ? Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          _openDatePicker(context);
-                        },
-                        child: Container(
-                          height: 50.0,
-                          width: 180.0,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.calendar_today,
-                              color: Colors.white,
-                            ),
-                            title: Text(
-                              _selectDate,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          _openDatePicker(context);
-                        },
-                        child: Container(
-                          height: 50.0,
-                          width: 180.0,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.calendar_today,
-                              color: Colors.white,
-                            ),
-                            title: Text(
-                              _selectDate,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              : SizedBox(
-                  height: 20.0,
-                ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
