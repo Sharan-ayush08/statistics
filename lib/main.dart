@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Statistics"),
         ),
-        body: Statistics(),
+        body: SingleChildScrollView(
+          child: Statistics(),
+        ),
       ),
     );
   }

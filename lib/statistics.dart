@@ -18,7 +18,26 @@ class _StatisticsState extends State<Statistics> {
   }
 
   bool selectDuty = false;
-
+  List<Color> color = [
+    Colors.blue,
+    Colors.amber,
+    Colors.red,
+    Colors.yellow,
+    Colors.black,
+    Colors.purple
+  ];
+  List shift = ["Morning", "Night", "Evening", "Free", "Afternoon", "Night"];
+  List count = ['1', '2', '3', '4', '5', '6'];
+  List time = ['10h,0m', '10h,0m', '10h,0m', '10h,0m', '7h,8m', '10h,6m'];
+  List amount = ['0 Rs', '0 Rs', '0 Rs', '0 Rs', '0 Rs', '5 Rs'];
+  List sum = [
+    Icons.check,
+    Icons.check,
+    Icons.check,
+    Icons.check,
+    Icons.check,
+    Icons.check
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -122,137 +141,103 @@ class _StatisticsState extends State<Statistics> {
           SizedBox(
             height: 15.0,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 23,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.blue[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 3.0, top: 3.0),
-                    child: Text(
-                      "Morning",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                height: 300,
+                width: 75,
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          height: 8,
+                        );
+                      },
+                      itemCount: shift.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: color[index],
+                          ),
+                          child: Card(
+                            child: Text(
+                              shift[index],
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        );
+                      }),
                 ),
-                Text(
-                  "2",
-                  style: TextStyle(fontSize: 20),
+              ),
+              Container(
+                height: 300,
+                width: 75,
+                child: ListView.separated(
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(height: 8);
+                    },
+                    itemCount: count.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 25, top: 10),
+                        child: Text(count[index]),
+                      );
+                    }),
+              ),
+              Container(
+                height: 300,
+                width: 75,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(height: 10);
+                      },
+                      itemCount: time.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Text(
+                          time[index],
+                          style: TextStyle(fontSize: 20),
+                        );
+                      }),
                 ),
-                Text("10h,0m", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("0 Rupee", style: TextStyle(fontWeight: FontWeight.bold)),
-                Padding(
+              ),
+              Container(
+                height: 300,
+                width: 75,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 12, left: 18),
+                  child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(height: 10);
+                      },
+                      itemCount: amount.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Text(
+                          amount[index],
+                          style: TextStyle(fontSize: 20),
+                        );
+                      }),
+                ),
+              ),
+              Container(
+                height: 300,
+                width: 75,
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.check),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 23,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 3.0, top: 3.0),
-                    child: Text(
-                      "Night",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                  child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(height: 9);
+                      },
+                      itemCount: sum.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Icon(sum[index]);
+                      }),
                 ),
-                Text(
-                  "2",
-                  style: TextStyle(fontSize: 20),
-                ),
-                Text("10h,0m", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("0 Rupee", style: TextStyle(fontWeight: FontWeight.bold)),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.check),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 23,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 3.0, top: 3.0),
-                    child: Text(
-                      "Holiday",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                Text(
-                  "2",
-                  style: TextStyle(fontSize: 20),
-                ),
-                Text("10h,0m", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("0 Rupee", style: TextStyle(fontWeight: FontWeight.bold)),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.check),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 23,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 3.0, top: 3.0),
-                    child: Text(
-                      "Free",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                Text(
-                  "2",
-                  style: TextStyle(fontSize: 20),
-                ),
-                Text("10h,0m", style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("0 Rupee", style: TextStyle(fontWeight: FontWeight.bold)),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.check),
-                )
-              ],
-            ),
+              ),
+            ],
           ),
           SizedBox(
             height: 20.0,
@@ -382,13 +367,16 @@ class _DateState extends State<Date> {
               children: [
                 Text(
                   "From",
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),
                 ),
                 Text("To",
                     style:
-                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700)),
               ],
             ),
+          ),
+          SizedBox(
+            height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -401,17 +389,17 @@ class _DateState extends State<Date> {
                   height: 50.0,
                   width: 180.0,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(width: 1),
                   ),
                   child: ListTile(
                     leading: Icon(
-                      Icons.calendar_today,
-                      color: Colors.white,
+                      Icons.date_range_outlined,
+                      color: Colors.black,
                     ),
                     title: Text(
                       _selectDate,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
@@ -426,17 +414,16 @@ class _DateState extends State<Date> {
                       height: 50.0,
                       width: 180.0,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
+                          borderRadius: BorderRadius.circular((10.0)),
+                          border: Border.all(width: 1)),
                       child: ListTile(
                         leading: Icon(
-                          Icons.calendar_today,
-                          color: Colors.white,
+                          Icons.date_range_outlined,
+                          color: Colors.black,
                         ),
                         title: Text(
                           _selectDate,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),
