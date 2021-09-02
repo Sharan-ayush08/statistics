@@ -24,9 +24,19 @@ class _StatisticsState extends State<Statistics> {
     Colors.red,
     Colors.yellow,
     Colors.black,
-    Colors.purple
+    Colors.purple,
+    Colors.brown,
+    Colors.green,
+    Colors.greenAccent
   ];
-  List shift = ["Morning", "Night", "Evening", "Free", "Afternoon", "Night"];
+  List shift = [
+    "Morning",
+    "Night",
+    "Evening",
+    "Free",
+    "Afternoon",
+    "Night",
+  ];
   List count = ['1', '2', '3', '4', '5', '6'];
   List time = ['10h,0m', '10h,0m', '10h,0m', '10h,0m', '7h,8m', '10h,6m'];
   List amount = ['0 Rs', '0 Rs', '0 Rs', '0 Rs', '0 Rs', '5 Rs'];
@@ -141,103 +151,114 @@ class _StatisticsState extends State<Statistics> {
           SizedBox(
             height: 15.0,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                height: 300,
-                width: 75,
-                child: Padding(
-                  padding: const EdgeInsets.all(7.0),
-                  child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height: 8,
-                        );
-                      },
-                      itemCount: shift.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: color[index],
-                          ),
-                          child: Card(
-                            child: Text(
-                              shift[index],
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ),
-                        );
-                      }),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 300,
+                      width: 75,
+                      child: Padding(
+                        padding: const EdgeInsets.all(7.0),
+                        child: ListView.separated(
+                            scrollDirection: Axis.vertical,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                height: 8,
+                              );
+                            },
+                            itemCount: shift.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: color[index],
+                                ),
+                                child: Card(
+                                  child: Text(
+                                    shift[index],
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                    ),
+                    Container(
+                      height: 300,
+                      width: 75,
+                      child: ListView.separated(
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(height: 9);
+                          },
+                          itemCount: count.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 25, top: 10),
+                              child: Text(count[index]),
+                            );
+                          }),
+                    ),
+                    Container(
+                      height: 300,
+                      width: 75,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: ListView.separated(
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(height: 11);
+                            },
+                            itemCount: time.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Text(
+                                time[index],
+                                style: TextStyle(fontSize: 20),
+                              );
+                            }),
+                      ),
+                    ),
+                    Container(
+                      height: 300,
+                      width: 75,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 12, left: 18),
+                        child: ListView.separated(
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(height: 11);
+                            },
+                            itemCount: amount.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Text(
+                                amount[index],
+                                style: TextStyle(fontSize: 20),
+                              );
+                            }),
+                      ),
+                    ),
+                    Container(
+                      height: 300,
+                      width: 75,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.separated(
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(height: 10);
+                            },
+                            itemCount: sum.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Icon(sum[index]);
+                            }),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Container(
-                height: 300,
-                width: 75,
-                child: ListView.separated(
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(height: 8);
-                    },
-                    itemCount: count.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 25, top: 10),
-                        child: Text(count[index]),
-                      );
-                    }),
-              ),
-              Container(
-                height: 300,
-                width: 75,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 10);
-                      },
-                      itemCount: time.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Text(
-                          time[index],
-                          style: TextStyle(fontSize: 20),
-                        );
-                      }),
-                ),
-              ),
-              Container(
-                height: 300,
-                width: 75,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 12, left: 18),
-                  child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 10);
-                      },
-                      itemCount: amount.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Text(
-                          amount[index],
-                          style: TextStyle(fontSize: 20),
-                        );
-                      }),
-                ),
-              ),
-              Container(
-                height: 300,
-                width: 75,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 9);
-                      },
-                      itemCount: sum.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Icon(sum[index]);
-                      }),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
           SizedBox(
             height: 20.0,
