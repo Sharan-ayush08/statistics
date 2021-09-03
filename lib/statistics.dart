@@ -147,37 +147,39 @@ class _StatisticsState extends State<Statistics> {
           SizedBox(
             height: 20.0,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                "Shift",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Count",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Time",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Amount",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Sum",
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 15.0,
-          ),
           SingleChildScrollView(
             child: Column(
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Shift",
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Count",
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Time",
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Amount",
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Sum",
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
