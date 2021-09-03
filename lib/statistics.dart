@@ -27,7 +27,9 @@ class _StatisticsState extends State<Statistics> {
     Colors.purple,
     Colors.brown,
     Colors.green,
-    Colors.greenAccent
+    Colors.greenAccent,
+    Colors.brown,
+    Colors.grey
   ];
   List shift = [
     "Morning",
@@ -36,11 +38,33 @@ class _StatisticsState extends State<Statistics> {
     "Free",
     "Afternoon",
     "Night",
+    "Night",
+    "Afternoon"
   ];
-  List count = ['1', '2', '3', '4', '5', '6'];
-  List time = ['10h,0m', '10h,0m', '10h,0m', '10h,0m', '7h,8m', '10h,6m'];
-  List amount = ['0 Rs', '0 Rs', '0 Rs', '0 Rs', '0 Rs', '5 Rs'];
+  List count = ['1', '2', '3', '4', '5', '6', '7', '8'];
+  List time = [
+    '10h,0m',
+    '10h,0m',
+    '10h,0m',
+    '10h,0m',
+    '7h,8m',
+    '10h,6m',
+    '5h,6m',
+    '5h,6m'
+  ];
+  List amount = [
+    '0 Rs',
+    '0 Rs',
+    '0 Rs',
+    '0 Rs',
+    '0 Rs',
+    '5 Rs',
+    '4 Rs',
+    '5 Rs'
+  ];
   List sum = [
+    Icons.check,
+    Icons.check,
     Icons.check,
     Icons.check,
     Icons.check,
@@ -128,23 +152,23 @@ class _StatisticsState extends State<Statistics> {
             children: [
               Text(
                 "Shift",
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               Text(
                 "Count",
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               Text(
                 "Time",
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               Text(
                 "Amount",
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               Text(
                 "Sum",
-                style: TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -159,7 +183,7 @@ class _StatisticsState extends State<Statistics> {
                   children: [
                     Container(
                       height: 300,
-                      width: 75,
+                      width: 90,
                       child: Padding(
                         padding: const EdgeInsets.all(7.0),
                         child: ListView.separated(
@@ -167,19 +191,23 @@ class _StatisticsState extends State<Statistics> {
                             separatorBuilder:
                                 (BuildContext context, int index) {
                               return SizedBox(
-                                height: 8,
+                                height: 10,
                               );
                             },
                             itemCount: shift.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
                                 decoration: BoxDecoration(
-                                  color: color[index],
-                                ),
-                                child: Card(
+                                    color: color[index],
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
                                   child: Text(
                                     shift[index],
-                                    style: TextStyle(fontSize: 14),
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               );
@@ -191,7 +219,7 @@ class _StatisticsState extends State<Statistics> {
                       width: 75,
                       child: ListView.separated(
                           separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(height: 9);
+                            return SizedBox(height: 10.5);
                           },
                           itemCount: count.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -209,7 +237,7 @@ class _StatisticsState extends State<Statistics> {
                         child: ListView.separated(
                             separatorBuilder:
                                 (BuildContext context, int index) {
-                              return SizedBox(height: 11);
+                              return SizedBox(height: 12.5);
                             },
                             itemCount: time.length,
                             itemBuilder: (BuildContext context, int index) {
@@ -228,7 +256,7 @@ class _StatisticsState extends State<Statistics> {
                         child: ListView.separated(
                             separatorBuilder:
                                 (BuildContext context, int index) {
-                              return SizedBox(height: 11);
+                              return SizedBox(height: 12);
                             },
                             itemCount: amount.length,
                             itemBuilder: (BuildContext context, int index) {
@@ -247,7 +275,7 @@ class _StatisticsState extends State<Statistics> {
                         child: ListView.separated(
                             separatorBuilder:
                                 (BuildContext context, int index) {
-                              return SizedBox(height: 10);
+                              return SizedBox(height: 11);
                             },
                             itemCount: sum.length,
                             itemBuilder: (BuildContext context, int index) {
@@ -360,7 +388,7 @@ class Date extends StatefulWidget {
 }
 
 class _DateState extends State<Date> {
-  String _selectDate = DateTime.now().toString();
+  String? selectDate = 'Choose Date';
   _openDatePicker(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -368,11 +396,13 @@ class _DateState extends State<Date> {
       firstDate: DateTime(1940),
       lastDate: DateTime(2030),
     );
+    // ignore: unrelated_type_equality_checks
     if (picked != null) {
       setState(() {
-        _selectDate = new DateFormat.yMEd("en_US").format(picked).toString();
+        selectDate =
+            "${picked.toLocal().day}/${picked.toLocal().month}/${picked.toLocal().year}";
         // print(date.toString());
-        print(_selectDate);
+        print(selectDate);
       });
     }
   }
@@ -417,10 +447,11 @@ class _DateState extends State<Date> {
                     leading: Icon(
                       Icons.date_range_outlined,
                       color: Colors.black,
+                      size: 28,
                     ),
                     title: Text(
-                      _selectDate,
-                      style: TextStyle(color: Colors.black),
+                      selectDate!,
+                      style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   ),
                 ),
@@ -441,10 +472,11 @@ class _DateState extends State<Date> {
                         leading: Icon(
                           Icons.date_range_outlined,
                           color: Colors.black,
+                          size: 28,
                         ),
                         title: Text(
-                          _selectDate,
-                          style: TextStyle(color: Colors.black),
+                          selectDate!,
+                          style: TextStyle(color: Colors.black, fontSize: 18),
                         ),
                       ),
                     ),
