@@ -1,5 +1,6 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key? key}) : super(key: key);
@@ -72,6 +73,7 @@ class _StatisticsState extends State<Statistics> {
     Icons.check,
     Icons.check
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -390,7 +392,12 @@ class Date extends StatefulWidget {
 }
 
 class _DateState extends State<Date> {
-  String? selectDate = 'Choose Date';
+  final dateController = TextEditingController();
+  final dateController2 = TextEditingController();
+
+  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate2 = DateTime.now();
+
   _openDatePicker(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -399,14 +406,39 @@ class _DateState extends State<Date> {
       lastDate: DateTime(2030),
     );
     // ignore: unrelated_type_equality_checks
-    if (picked != null) {
+    if (picked != null && picked != selectedDate) {
       setState(() {
-        selectDate =
+        selectedDate = picked;
+        var date =
             "${picked.toLocal().day}/${picked.toLocal().month}/${picked.toLocal().year}";
-        // print(date.toString());
-        print(selectDate);
+        dateController.text = date;
       });
     }
+  }
+
+  _openDatePicker2(BuildContext context) async {
+    final DateTime? picked2 = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1940),
+      lastDate: DateTime(2030),
+    );
+    // ignore: unrelated_type_equality_checks
+    if (picked2 != null && picked2 != selectedDate2) {
+      setState(() {
+        selectedDate2 = picked2;
+        var date2 =
+            "${picked2.toLocal().day}/${picked2.toLocal().month}/${picked2.toLocal().year}";
+        dateController2.text = date2;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    dateController.dispose();
+    dateController2.dispose();
+    super.dispose();
   }
 
   @override
@@ -434,50 +466,55 @@ class _DateState extends State<Date> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              InkWell(
-                onTap: () {
-                  _openDatePicker(context);
-                },
-                child: Container(
-                  height: 50.0,
-                  width: 180.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(width: 1),
+              Container(
+                height: 50.0,
+                width: 180.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(width: 1),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.date_range_outlined,
+                    color: Colors.black,
+                    size: 28,
                   ),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.date_range_outlined,
-                      color: Colors.black,
-                      size: 28,
-                    ),
-                    title: Text(
-                      selectDate!,
+                  title: GestureDetector(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Choose Date',
+                        border: InputBorder.none,
+                      ),
+                      controller: dateController,
+                      onTap: () => _openDatePicker(context),
                       style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   ),
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      _openDatePicker(context);
-                    },
-                    child: Container(
-                      height: 50.0,
-                      width: 180.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular((10.0)),
-                          border: Border.all(width: 1)),
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.date_range_outlined,
-                          color: Colors.black,
-                          size: 28,
-                        ),
-                        title: Text(
-                          selectDate!,
+                  Container(
+                    height: 50.0,
+                    width: 180.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular((10.0)),
+                        border: Border.all(width: 1)),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.date_range_outlined,
+                        color: Colors.black,
+                        size: 28,
+                      ),
+                      title: GestureDetector(
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Choose Date',
+                            border: InputBorder.none,
+                          ),
+                          controller: dateController2,
+                          onTap: () => _openDatePicker2(context),
                           style: TextStyle(color: Colors.black, fontSize: 18),
                         ),
                       ),
